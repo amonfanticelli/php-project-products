@@ -1,0 +1,10 @@
+{
+  "name": "amon/php-project-products",
+  "authors": [
+    {
+      "name": "Amon",
+      "email": "amon_fanticelli@hotmail.com"
+    }
+  ],
+  "require": {}
+}
