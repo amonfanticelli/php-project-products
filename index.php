@@ -26,11 +26,19 @@ if ($parts[1] != "products") {
     exit;
 };
 
-$database = new Database("localhost", "product_db", "myuser", "mysql");
+require 'vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+
+
+$database = new Database($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
 
 $database->getConnection();
 
 $controller = new ProductController;
 
 $controller->processRequest($_SERVER["REQUEST_METHOD"]);
-require_once $_SERVER['DOCUMENT_ROOT'] . '/common/configs/config_templates.inc.php';
