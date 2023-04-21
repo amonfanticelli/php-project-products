@@ -38,9 +38,10 @@ $dotenv->load();
 
 $database = new Database($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
 
-$database->getConnection();
+require_once 'src/productGateway/ProductGateway.php';
+$gateway = new ProductGateway($database);
 
 require_once 'src/productController/ProductController.php';
-$controller = new ProductController;
+$controller = new ProductController($gateway);
 
 $controller->processRequest($_SERVER["REQUEST_METHOD"]);

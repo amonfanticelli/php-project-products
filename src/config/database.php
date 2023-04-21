@@ -11,7 +11,7 @@ class Database
     }
     public function getConnection(): PDO
     {
-        $dsn = "mysql:host={$this->host};db_name={$this->db_name};charset=utf8";
+        $dsn = "mysql:host={$this->host};dbname={$this->db_name};charset=utf8";
 
         return new PDO($dsn, $this->user, $this->password);
     }
