@@ -16,6 +16,9 @@ spl_autoload_register(function ($class) {
     }
 });
 
+require_once 'src/error/errorHandler.php';
+set_exception_handler("ErrorHandler::handleException");
+
 
 header("Content-type: application/json; charset=UTF-8");
 
@@ -33,12 +36,11 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-
-
 $database = new Database($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
 
 $database->getConnection();
 
+require_once 'src/productController/ProductController.php';
 $controller = new ProductController;
 
 $controller->processRequest($_SERVER["REQUEST_METHOD"]);
